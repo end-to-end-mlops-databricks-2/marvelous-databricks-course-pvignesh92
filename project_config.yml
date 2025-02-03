@@ -1,0 +1,33 @@
+parameters:
+  learning_rate: 0.01
+  n_estimators: 1000
+  max_depth: 6
+
+features_to_impute:
+  - Seats 
+  - Kilometers_Driven
+  - mileage_num
+  - engine_num
+  - power_num
+
+cat_features:
+  - Location
+  - Fuel_Type
+  - Transmission
+  - Owner_Type
+  - Brand
+  - Model
+
+num_features:
+  - Year
+  - Seats
+  - Kilometers_Driven
+  - mileage_num
+  - engine_num
+  - power_num
+  - New_Price 
+
+target: Price
+
+catalog_name: mlops_dev
+schema_name: pvignesh
