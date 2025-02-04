@@ -1,9 +1,9 @@
 # Databricks notebook source
 # COMMAND ----------
-import yaml
 import logging
+import sys
+import yaml
 from pyspark.sql import SparkSession
-import sys 
 from car_price.config import ProjectConfig
 from car_price.utils import read_csv_pandas, print_shape
 from car_price.data_processor import DataProcessor
