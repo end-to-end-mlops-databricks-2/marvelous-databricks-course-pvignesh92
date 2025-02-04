@@ -1,15 +1,10 @@
 import logging
-import sys
-import warnings
-from datetime import datetime
-import numpy as np
 import pandas as pd
+import sys
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import current_timestamp, to_utc_timestamp
 from sklearn.model_selection import train_test_split
-
 from car_price.config import ProjectConfig
-warnings.filterwarnings("ignore")  # Not always recommended, but jsut so our notebook looks clean for this activity
 
 # Add project root to Python path
 sys.path.append("src")
