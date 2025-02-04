@@ -84,3 +84,4 @@ class DataProcessor:
         
         spark.sql(f"ALTER TABLE {self.config.catalog_name}.{self.config.schema_name}.test_set "
           "SET TBLPROPERTIES (delta.enableChangeDataFeed = true);")
+       

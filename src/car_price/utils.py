@@ -26,3 +26,4 @@ def corr_matrix(df: pd.DataFrame) -> pd.DataFrame:
 def get_missing_values(df: pd.DataFrame) -> pd.DataFrame:
     """Return the missing values in a DataFrame."""
     return df.isnull().sum()
+
