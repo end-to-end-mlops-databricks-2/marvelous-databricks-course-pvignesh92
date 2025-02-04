@@ -35,8 +35,8 @@ build-backend = "setuptools.build_meta"
 where =["src"]
 include = ["car_price*"]
 
-[tool.ruff]
-line-length = 120
+[tool.ruff.lint]
+# line-length = 120
 select = [
     "F",  # pyflakes rules
     "E",  # pycodestyle error rules
@@ -46,6 +46,14 @@ select = [
 ]
 ignore = [
     "E501",  # line-too-long
+    "E402",  # Ignoring top-level imports
+    "F821", # Ignore db-utils import since it is Databricks provided
+    "W291", # Ignore Trailing whitespace
+    "W292", # Ignore No newline at end of file
+    "W293", # Ignore Blank line contains whitespace
+    "EXE001", # Ignore Executable file with missing shebangs
+    "I001", # Ignore Unsorted imports
+    "F401" # Ignore Unused imports
 ]
 
 [tool.ruff.format]
