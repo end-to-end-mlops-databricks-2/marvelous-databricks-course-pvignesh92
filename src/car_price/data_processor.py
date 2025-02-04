@@ -66,7 +66,7 @@ class DataProcessor:
         return df
     
 
-    def save_to_catalog(self, train_set: pd.DataFrame, test_set: pd.DataFrame, spark: SparkSession):
+    def save_to_catalog(self, train_set: pd.DataFrame, test_set: pd.DataFrame, spark: SparkSession, write_mode="append"):
         """Save the train and test sets into Databricks tables."""
 
         train_set_with_timestamp = spark.createDataFrame(train_set).withColumn(
@@ -75,10 +75,10 @@ class DataProcessor:
         test_set_with_timestamp = spark.createDataFrame(test_set).withColumn(
             "update_timestamp_utc", to_utc_timestamp(current_timestamp(), "UTC"))
 
-        train_set_with_timestamp.write.mode("append").saveAsTable(
+        train_set_with_timestamp.write.mode(write_mode).saveAsTable(
             f"{self.config.catalog_name}.{self.config.schema_name}.train_set")
         
-        test_set_with_timestamp.write.mode("append").saveAsTable(
+        test_set_with_timestamp.write.mode(write_mode).saveAsTable(
             f"{self.config.catalog_name}.{self.config.schema_name}.test_set")
 
         spark.sql(f"ALTER TABLE {self.config.catalog_name}.{self.config.schema_name}.train_set "
