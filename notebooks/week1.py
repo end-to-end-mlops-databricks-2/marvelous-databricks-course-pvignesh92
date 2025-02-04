@@ -3,15 +3,14 @@
 import yaml
 import logging
 from pyspark.sql import SparkSession
-
 import sys 
-sys.path.append("./src")
-# COMMAND ----------
-
 from car_price.config import ProjectConfig
 from car_price.utils import read_csv_pandas, print_shape
 from car_price.data_processor import DataProcessor
 
+# COMMAND ----------
+# Add project root to Python path
+sys.path.append("./src")
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -21,13 +20,11 @@ logger.info(f"Configuration loaded: {config}")
 logger.info(yaml.dump(config, default_flow_style=False))
 
 # COMMAND ----------
-
 # Reading the datsets 
 cars_data_df = read_csv_pandas(file_path="./data/used_cars_data.csv")
 logger.info(f"Shape of Cars data: {print_shape(cars_data_df)}")
 
 # COMMAND ----------
-
 # Initialize DataProcessor
 data_processor = DataProcessor(cars_data_df, config)
 # Preprocess the data
