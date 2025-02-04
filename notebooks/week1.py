@@ -20,7 +20,7 @@ logger.info(f"Configuration loaded: {config}")
 logger.info(yaml.dump(config, default_flow_style=False))
 
 # COMMAND ----------
-# Reading the datsets 
+# Reading the datsets
 cars_data_df = read_csv_pandas(file_path="./data/used_cars_data.csv")
 logger.info(f"Shape of Cars data: {print_shape(cars_data_df)}")
 
