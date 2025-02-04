@@ -6,18 +6,16 @@ import pandas as pd
 import logging
 from sklearn.model_selection import train_test_split
 import warnings
+import sys 
+from car_price.config import ProjectConfig
+warnings.filterwarnings("ignore")  # Not always recommended, but jsut so our notebook looks clean for this activity
 
+# Add project root to Python path
+sys.path.append("src")
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
-
-import sys 
-sys.path.append("src")
-
-warnings.filterwarnings("ignore")  # Not always recommended, but jsut so our notebook looks clean for this activity
-
-from car_price.config import ProjectConfig
 
 class DataProcessor:
     def __init__(self, pandas_df: pd.DataFrame, config:ProjectConfig):
