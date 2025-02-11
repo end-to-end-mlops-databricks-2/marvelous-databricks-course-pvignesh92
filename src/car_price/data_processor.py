@@ -35,13 +35,20 @@ class DataProcessor:
         for col in cols_list:
             self.df[col] = self.df.groupby(["Brand", "Model"])[col].transform(lambda x: x.fillna(x.median()))
         self.df = self.df[self.df["Price"].notna()].copy()
-        logger.info(f"Shape of data after removing duplicates: {self.df.shape}")
 
-        self.df = pd.get_dummies(
-            self.df,
-            columns=self.df[self.config.cat_features].columns.tolist(),
-            drop_first=True,
-        )
+        # Drop rows where target variable is NaN
+        self.df = self.df[self.df["Price"].notna()].copy()
+    
+        # Fill any remaining NaN values with a specified value or drop them
+        self.df = self.df.fillna(0)  # or use self.df.dropna() to drop rows with NaN values
+
+        logger.info(f"Shape of data after cleaning up: {self.df.shape}")
+
+        # self.df = pd.get_dummies(
+        #     self.df,
+        #     columns=self.df[self.config.cat_features].columns.tolist(),
+        #     drop_first=True,
+        # )
 
         logger.info(f"Shape of data after encoding: {self.df.shape}")
         return self.df

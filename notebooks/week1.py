@@ -4,15 +4,16 @@ import logging
 import sys
 
 import yaml
-from pyspark.sql import SparkSession
-
+# from pyspark.sql import SparkSession
+from databricks.connect import DatabricksSession
+# Add project root to Python path
+sys.path.append("./src")
 from car_price.config import ProjectConfig
 from car_price.data_processor import DataProcessor
 from car_price.utils import print_shape, read_csv_pandas
 
 # COMMAND ----------
-# Add project root to Python path
-sys.path.append("./src")
+
 # Configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
@@ -44,5 +45,5 @@ X_train_cleaned = data_processor.clean_column_names(X_train)
 X_test_cleaned = data_processor.clean_column_names(X_test)
 
 # COMMAND ----------
-spark = SparkSession.builder.getOrCreate()
-data_processor.save_to_catalog(X_train_cleaned, X_test_cleaned, spark)
+spark = DatabricksSession.builder.getOrCreate()
+data_processor.save_to_catalog(X_train_cleaned, X_test_cleaned, spark, "overwrite")

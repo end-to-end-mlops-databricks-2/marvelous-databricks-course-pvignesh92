@@ -31,3 +31,4 @@ target: Price
 
 catalog_name: mlops_dev
 schema_name: pvignesh
+experiment_name_basic: /Shared/car-price-basic
